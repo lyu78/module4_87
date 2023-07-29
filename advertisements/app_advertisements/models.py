@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class Advertisements(models.Model):
+class Advertisement(models.Model):
 
     # Название товара
     # CharField - короткое текстове поле
