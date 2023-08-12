@@ -43,7 +43,6 @@ class Advertisement(models.Model):
     # Дата изменения/обновления + что изменилось
     updated_at = models.DateTimeField(auto_now=True)
 
-
     @admin.display(description='Дата создания')
     def created_date(self):
         from django.utils import timezone
@@ -65,6 +64,14 @@ class Advertisement(models.Model):
                 updated_date
             )
         return self.updated_at.strftime("%d.%m.%Y в %H:%M:%S")
+
+    @admin.display(description="Фото")
+    def get_html_image(self):
+        if self.image:
+            return format_html(
+                '<img src="{}" style="max-height:80px; max-width:80px;">',
+                self.image.url
+            )
 
     def __str__(self):
         return f"Advertisement(id={self.id}, title={self.title}, price={self.price})"
